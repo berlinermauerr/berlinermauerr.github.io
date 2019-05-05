@@ -27,27 +27,11 @@ block content
             "address": '#{job_listing.address}'
         }, function(results) {
             var marker = new google.maps.Marker({
-              map: map,
+              map:map,
               position: results[0].geometry.location
           });
-        });
-
-        addMarker(marker); //Adds the marker
-        //Add Marker Function
-        function addMarker(props){
-          var marker = new google.maps.Marker({
-            position:props.coords,
-            map:map,
-          });
-
-          //Check for customicon
-          if(props.iconImage){
-          //Set icon image
-            marker.setIcon(props.iconImage);
-          }
-          //Check content
-          var infoWindow = new google.maps.InfoWindow();
-          }
+        }); //Converts user address to point on map
+        var infoWindow = new google.maps.InfoWindow();
         }
       script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
 
