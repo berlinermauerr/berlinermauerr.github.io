@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  h1 #{title}
+  form(method='POST', action='/job_listings/edit/'+job_listing._id)
+    #form-group
+      label Title*
+      input.form-control(name='title', type='text', value=job_listing.title)
+    br
+    #form-group
+      label Description*
+      textarea.form-control(name='desc')= job_listing.desc
+    br
+    #form-group
+      label Rate of Pay
+      input.form-control(name='pay', type='text', value= job_listing.pay)
+    br
+    #form-group
+      label Address
+      input.form-control(name='address', type='text', value= job_listing.address)
+    br
+    //-
+      Images do not upload or submit
+    #form-group
+      label Photo
+      br
+      input#file(type='file', name='photo', accept='image/*')
+    br
+    a.btn.btn-outline-light(href='/job_listings/', style='margin-right: 20px;') Cancel
+    input.btn.btn-outline-primary(type='submit',value='Submit')

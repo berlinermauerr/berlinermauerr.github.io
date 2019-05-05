@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 #{title}
+  h4
+    <p> Search for Job Listings &amp; Requests </p>
+  hr
+  form.search_form.center-block(method='get', action="/search/")
+    .input-group.search_option
+      input#searchBox.search_field.form-control(type='text', name='q', placeholder='Search Job Finder')
+      span.input-group-btn
+        input#search.search_submit.btn.btn-info(onclick='myFunction()', type='submit', value='Search')
+  br
+  .form-check
+    input#ListingsCheckbox.form-check-input(type='radio', name='SearchCheckbox', checked='')
+    label.form-check-label(for='ListingsCheckbox') Job Listings
+  .form-check
+    input#RequestsCheckbox.form-check-input(type='radio', name='SearchCheckbox')
+    label.form-check-label(for='RequestsCheckbox') Job Requests

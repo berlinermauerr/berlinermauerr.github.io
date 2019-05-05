@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Job Finder
+    link(rel='stylesheet' href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet' href='/css/style.css')
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+      a.navbar-brand(href='/') Job Finder
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      #navbarCollapse.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          a.nav-link(href='/job_listings/') Listings
+          a.nav-link(href='/job_requests/') Requests
+        ul.navbar-nav.ml-auto
+          form.search_form.center-block(method='get', action="/search/")
+            .input-group.search_option
+              input#searchBox.search_field.form-control(type='text', name='q', placeholder='Search', style='margin-right: 3px;')
+              span.input-group-btn
+                input#search.search_submit.btn.btn-outline-info(onclick='myFunction()', type='submit', value='Search')
+          a.nav-link(href='/about') About
+          if user
+            a.nav-link(href='/users/logout') Logout
+          else
+            a.nav-link(href='/users/login') Login
+    .container
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Created by Caleb Hoff, Moe H-ibrahim, &amp; Berlinda Ho
+    script(src='/jquery/jquery.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='/js/main.js')

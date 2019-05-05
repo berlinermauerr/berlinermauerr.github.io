@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1 #{title}
+  h4
+    if user
+        a(href='/job_listings/add') (+) Create Job Listing
+    else
+      a(href='/users/login') (+) Login to Post Job Listings
+  hr
+  ul.list-group
+    each job_listing, i in job_listings
+      li.list-group-item
+        a(href="/job_listings/"+job_listing._id)= job_listing.title
+        if (job_listing.pay != "")
+          p= job_listing.pay
+    else
+      <p> No Job Listings to Display </p>

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1 Create an account
+  hr
+  form(method='POST', action='/users/register')
+    #form-group
+      label Name*
+      input.form-control(name='name', type='text')
+    <p></p>
+    #form-group
+      label Email*
+      input.form-control(name='username',type='text')
+    br
+    <p></p>
+    #form-group
+      label Password*
+      input.form-control(name='password',type='password')
+    <p></p>
+    #form-group
+      label Confirm Password*
+      input.form-control(name='password2',type='password')
+    br
+    input.btn.btn-outline-primary(type='submit',value='Submit')
