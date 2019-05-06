@@ -6,9 +6,8 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-const config = require('./config/database');
 
-mongoose.connect(config.database, { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/jobfinder', { useNewUrlParser: true });
 let db = mongoose.connection;
 
 //Check connection
@@ -41,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Express Session Middleware
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'Vita is awesome',
   resave: true,
   saveUninitialized: true
 }));
@@ -72,7 +71,7 @@ app.use(expressValidator({
 }));
 
 //Passport Config
-require('./config/passport')(passport);
+require('./public/js/passport')(passport);
 //Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
