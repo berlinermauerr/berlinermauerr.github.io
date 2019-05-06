@@ -48,7 +48,7 @@ router.post('/register', function(req, res){
             console.log(err);
             return;
           } else {
-            req.flash('success','You are now registered and can log in');
+            req.flash('success','Account Created! You can log in now.');
             res.redirect('/users/login');
           }
         });
