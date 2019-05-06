@@ -3,7 +3,7 @@ extends layout
 block content
   h1 #{title}
   hr
-  form(method='POST', action='/job_listings/add')
+  form(method='POST', action='/listings/add')
     #form-group
       label Title*
       input.form-control(name='title', type='text')
@@ -27,5 +27,5 @@ block content
       br
       input#file(type='file', name='photo', accept='image/*')
     br
-    a.btn.btn-outline-light(href='/job_listings/', style='margin-right: 20px;') Back
+    a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
     input.btn.btn-outline-primary(type='submit',value='Submit')

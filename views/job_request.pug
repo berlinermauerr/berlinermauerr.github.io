@@ -6,8 +6,8 @@ block content
   hr
   h3
     p= job_request.desc
-  a.btn.btn-outline-light(href='/job_requests/', style='margin-right: 20px;') Back
+  a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Back
   if user
     if user.id ==job_request.author
-      a.btn.btn-outline-info(href='/job_requests/edit/'+job_request._id, style='margin-right: 5px;') Edit 
+      a.btn.btn-outline-info(href='/requests/edit/'+job_request._id, style='margin-right: 5px;') Edit 
       a.btn.btn-outline-danger.delete-job_request(href='#',data-id=job_request._id) Delete

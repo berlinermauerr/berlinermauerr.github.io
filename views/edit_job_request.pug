@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 #{title}
-  form(method='POST', action='/job_requests/edit/'+job_request._id)
+  form(method='POST', action='/requests/edit/'+job_request._id)
     #form-group
       label Title*
       input.form-control(name='title', type='text', value=job_request.title)
@@ -11,5 +11,5 @@ block content
       label Description*
       textarea.form-control(name='desc')= job_request.desc
     br
-    a.btn.btn-outline-light(href='/job_requests/', style='margin-right: 20px;') Cancel
+    a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Cancel
     input.btn.btn-outline-primary(type='submit',value='Submit')

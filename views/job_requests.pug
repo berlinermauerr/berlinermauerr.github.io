@@ -4,13 +4,13 @@ block content
   h1 #{title}
   h4
     if user
-        a(href='/job_requests/add') (+) Create Job Request
+        a(href='/requests/add') (+) Create Job Request
     else
       a(href='/users/login') (+) Login to Post Job Requests
   hr
   ul.list-group
     each job_request, i in job_requests
       li.list-group-item
-        a(href="/job_requests/"+job_request._id)= job_request.title
+        a(href="/requests/"+job_request._id)= job_request.title
     else
       <p> No Job Requests to Display </p>

@@ -4,9 +4,9 @@ $(document).ready(function(){
     const id = $target.attr('data-id');
     $.ajax({
       type:'DELETE',
-      url: '/job_listings/'+id,
+      url: '/listings/'+id,
       success: function(response){
-        window.location.href='/job_listings/';
+        window.location.href='/listings/';
       },
       error: function(err){
         console.log(err);
@@ -18,9 +18,9 @@ $(document).ready(function(){
     const id = $target.attr('data-id');
     $.ajax({
       type:'DELETE',
-      url: '/job_requests/'+id,
+      url: '/requests/'+id,
       success: function(response){
-        window.location.href='/job_requests/';
+        window.location.href='/requests/';
       },
       error: function(err){
         console.log(err);

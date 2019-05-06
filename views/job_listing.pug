@@ -8,7 +8,7 @@ block content
     p= job_listing.desc
   br
   h4
-    p= job_listing.pay == " " || job_listing.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_listing.pay
+    p= job_listing.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_listing.pay
     <p></p>
     if (job_listing.address == "")
       p='Address: Not Disclosed'
@@ -35,8 +35,8 @@ block content
         }
       script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
 
-  a.btn.btn-outline-light(href='/job_listings/', style='margin-right: 20px;') Back
+  a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
   if user
     if user.id ==job_listing.author
-      a.btn.btn-outline-info(href='/job_listings/edit/'+job_listing._id, style='margin-right: 5px;') Edit 
+      a.btn.btn-outline-info(href='/listings/edit/'+job_listing._id, style='margin-right: 5px;') Edit 
       a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id) Delete

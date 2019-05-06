@@ -90,7 +90,7 @@ app.get('/', function(req, res){
 });
 
 //Listings Route
-app.get('/job_listings', function(req, res){
+app.get('/listings', function(req, res){
   job_listing.find({}, function(err, job_listings){
     if(err){
       console.log(err);
@@ -104,7 +104,7 @@ app.get('/job_listings', function(req, res){
 });
 
 //Requests Route
-app.get('/job_requests', function(req, res){
+app.get('/requests', function(req, res){
   job_request.find({}, function(err, job_requests){
     if(err){
       console.log(err);
@@ -138,11 +138,11 @@ app.get('/about', function(req, res){
 });
 
 //Route Files
-let job_listings = require('./routes/job_listings');
-let job_requests = require('./routes/job_requests');
+let job_listings = require('./routes/listings');
+let job_requests = require('./routes/requests');
 let users = require('./routes/users');
-app.use('/job_listings', job_listings);
-app.use('/job_requests', job_requests);
+app.use('/listings', job_listings);
+app.use('/requests', job_requests);
 app.use('/users', users);
 
 //Catch 404
