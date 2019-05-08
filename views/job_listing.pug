@@ -4,116 +4,113 @@ block content
   h1= "Job Offer: " + job_listing.title
   h5 Posted By: #{author}
   hr
-  h3
-    p= job_listing.desc
+  h3 #{job_listing.desc}
   br
   h4
     p= job_listing.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_listing.pay
-    <p></p>
     if (job_listing.address == "")
       p='Address: Not Disclosed'
     else
       p= 'Address: ' + job_listing.address
       #map
-      script.
-        function initMap(){
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center:{lat:53.3811,lng:-1.4701}, //Centers on Sheffield
-          zoom:7,
-          styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#337ab7'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#77a7d1'}]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#263c3f'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#6b9a76'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#1b1f22'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#17263c'}]
-            }
-          ]
-        }); //Makes a new map
-
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({
-            "address": '#{job_listing.address}'
-        }, function(results) {
-            var marker = new google.maps.Marker({
-              map:map,
-              position: results[0].geometry.location
-          });
-        }); //Converts user address to point on map
-        var infoWindow = new google.maps.InfoWindow();
-        }
-      script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
+        script.
+          function initMap() { //Begins script for creating map element
+            var geocoder = new google.maps.Geocoder(); //Used for converting user address to latitude/longitude
+            geocoder.geocode({"address": '#{job_listing.address}'}, function(results) {
+              var map = new google.maps.Map(document.getElementById('map'), { //Creates a new map
+                center:results[0].geometry.location, //Centers map on chosen address
+                zoom:12, //Zooms in on location
+                styles: [ //Customizes map theme to match dark website
+                  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                  {elementType: 'labels.text.fill', stylers: [{color: '#337ab7'}]},
+                  {
+                    featureType: 'administrative.locality',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#77a7d1'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#d59563'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'geometry',
+                    stylers: [{color: '#263c3f'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#6b9a76'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry',
+                    stylers: [{color: '#38414e'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#212a37'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#9ca5b3'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry',
+                    stylers: [{color: '#746855'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#1f2835'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#f3d19c'}]
+                  },
+                  {
+                    featureType: 'transit',
+                    elementType: 'geometry',
+                    stylers: [{color: '#2f3948'}]
+                  },
+                  {
+                    featureType: 'transit.station',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#d59563'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'geometry',
+                    stylers: [{color: '#1b1f22'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#515c6d'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.stroke',
+                    stylers: [{color: '#17263c'}]
+                  }
+                ]
+              });
+              var marker = new google.maps.Marker({ //Makes a marker on the map
+                map:map,
+                animation: google.maps.Animation.DROP, //Adds pin drop animation
+                position: results[0].geometry.location, //Sets marker position
+                title: '#{job_listing.address}', //Sets tooltip text for marker
+                icon: '/images/mapmarker.png' //Sets custom map marker
+              });
+            });
+          }
+        script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
 
   a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
   if user

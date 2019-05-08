@@ -4,8 +4,7 @@ block content
   h1= "Job Request: " + job_request.title
   h5 Posted By: #{author}
   hr
-  h3
-    p= job_request.desc
+  h3 #{job_request.desc}
   a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Back
   if user
     if user.id ==job_request.author
