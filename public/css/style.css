@@ -10,13 +10,6 @@
   border-color: #d6e9c6;
 }
 
-.navbar.navbar-dark{
-  background-color: #1b1f22;
-  border-color: #1b1f22;
-  border-bottom-color: #DDDDDD;
-  border-width: medium;
-}
-
 .container{
   color: #DDDDDD;
   background-color: #1b1f22;
@@ -46,16 +39,16 @@ h5{
   color: #337ab7;
 }
 
+hr
+{
+  border-top: 2px solid #ccc;
+}
+
 .list-group-item{
   background-color: #FFFFFF;
   border-color: #1b1f22;
   border-bottom-width: thick;
   border-block-end-color: #337ab7;
-}
-
-hr
-{
-  border-top: 2px solid #ccc;
 }
 
 #map{
