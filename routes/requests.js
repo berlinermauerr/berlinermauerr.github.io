@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-//job_request Model
-let Job_request = require('../models/job_request');
-//User Model
-let User = require('../models/user');
+let Job_request = require('../models/job_request'); //Job Request Model
+let User = require('../models/user'); //User Model
 
 //Add Route
 router.get('/add', ensureAuthenticated, function(req, res) {
@@ -13,10 +11,9 @@ router.get('/add', ensureAuthenticated, function(req, res) {
   });
 });
 
-//Add Submit POST Route
+//Add Job Request
 router.post('/add', function(req, res) {
   req.checkBody('title','Title is required').notEmpty();
-  //req.checkBody('author','Author is required').notEmpty();
   req.checkBody('desc','Description is required').notEmpty();
 
   //Get Errors

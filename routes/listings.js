@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-//Job Listing Model
-let Job_listing = require('../models/job_listing');
-//User Model
-let User = require('../models/user');
+let Job_listing = require('../models/job_listing'); //Job Listing Model
+let User = require('../models/user'); //User Model
 
 //Add Route
 router.get('/add', ensureAuthenticated, function(req, res) {
@@ -13,10 +11,9 @@ router.get('/add', ensureAuthenticated, function(req, res) {
   });
 });
 
-//Add Submit POST Route
+//Add Job Listing
 router.post('/add', function(req, res) {
   req.checkBody('title','Title is required').notEmpty();
-  //req.checkBody('author','Author is required').notEmpty();
   req.checkBody('desc','Description is required').notEmpty();
 
   //Get Errors
@@ -71,9 +68,7 @@ router.post('/edit/:id', function(req, res) {
   job_listing.address = req.body.address;
   //Images will probably have to be updated here
 
-  let query = {_id:req.params.id}
-
-  Job_listing.updateOne(query, job_listing, function(err) {
+  Job_listing.updateOne({_id:req.params.id}, job_listing, function(err) {
     if (err) {
       console.log(err);
       return;
@@ -89,13 +84,11 @@ router.delete('/:id', function(req, res) {
   if (!req.user._id)
     res.status(500).send();
 
-  let query = {_id:req.params.id}
-
   Job_listing.findById(req.params.id, function(err, job_listing) {
     if (job_listing.author != req.user._id)
       res.status(500).send();
     else {
-      job_listing.remove(query, function(err) {
+      job_listing.remove({_id:req.params.id}, function(err) {
         if (err)
           console.log(err);
         res.send('Success');

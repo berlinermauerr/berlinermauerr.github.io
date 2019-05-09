@@ -3,8 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-//Bring in User Model
-let User = require('../models/user');
+let User = require('../models/user'); //User Model
 
 //Register Form
 router.get('/register', function(req, res) {
@@ -91,7 +90,7 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res) {
   });
 });
 
-//Edit User Bio
+//Edit User Info
 router.post('/edit/:id', function(req, res) {
   let user = {};
   user.name = req.body.name;
