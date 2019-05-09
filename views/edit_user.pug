@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 #{title}
+  h4 Your User Information
+  hr
+  form(method='POST', action='/users/edit/'+user._id)
+    #form-group
+      label Name*
+      input.form-control(name='name', type='text', value= user.name)
+    br
+    #form-group
+      label Email*
+      input.form-control(name='username', type='text', value= user.username)
+    br
+    #form-group
+      label Bio
+      textarea.form-control(name='desc', type='text')= user.desc
+    br
+    //-
+      Images do not upload or submit
+    #form-group
+      label Avatar
+      br
+      input#file(name='photo', type='file', accept='image/*')
+    br
+    a.btn.btn-outline-light(href='/users/'+user._id, style='margin-right: 20px;') Cancel
+    input.btn.btn-outline-primary(type='submit',value='Submit')

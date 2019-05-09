@@ -7,14 +7,14 @@ let Job_listing = require('../models/job_listing');
 let User = require('../models/user');
 
 //Add Route
-router.get('/add', ensureAuthenticated, function(req, res){
+router.get('/add', ensureAuthenticated, function(req, res) {
   res.render('add_job_listing', {
     title:'Create Job Listing'
   });
 });
 
 //Add Submit POST Route
-router.post('/add', function(req, res){
+router.post('/add', function(req, res) {
   req.checkBody('title','Title is required').notEmpty();
   //req.checkBody('author','Author is required').notEmpty();
   req.checkBody('desc','Description is required').notEmpty();
@@ -22,12 +22,12 @@ router.post('/add', function(req, res){
   //Get Errors
   let errors = req.validationErrors();
 
-  if(errors){
+  if (errors)
     res.render('add_job_listing', {
       title:'Create Job Listing',
       errors:errors
     });
-  } else {
+  else {
     let job_listing = new Job_listing();
     job_listing.title = req.body.title;
     job_listing.author = req.user._id;
@@ -36,8 +36,8 @@ router.post('/add', function(req, res){
     job_listing.address = req.body.address;
     //Images will probably have to be saved here
 
-    job_listing.save(function(err){
-      if(err){
+    job_listing.save(function(err) {
+      if (err) {
         console.log(err);
         return;
       } else {
@@ -49,9 +49,9 @@ router.post('/add', function(req, res){
 });
 
 //Load Edit Form
-router.get('/edit/:id', ensureAuthenticated, function(req, res){
-  Job_listing.findById(req.params.id, function(err, job_listing){
-    if(job_listing.author != req.user._id){
+router.get('/edit/:id', ensureAuthenticated, function(req, res) {
+  Job_listing.findById(req.params.id, function(err, job_listing) {
+    if (job_listing.author != req.user._id) {
       req.flash('danger', 'Not Authorized');
       res.redirect('/listings/');
     }
@@ -62,8 +62,8 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
   });
 });
 
-//Update Submit POST Route
-router.post('/edit/:id', function(req, res){
+//Edit Job Listing
+router.post('/edit/:id', function(req, res) {
   let job_listing = {};
   job_listing.title = req.body.title;
   job_listing.desc = req.body.desc;
@@ -73,8 +73,8 @@ router.post('/edit/:id', function(req, res){
 
   let query = {_id:req.params.id}
 
-  Job_listing.updateOne(query, job_listing, function(err){
-    if(err){
+  Job_listing.updateOne(query, job_listing, function(err) {
+    if (err) {
       console.log(err);
       return;
     } else {
@@ -84,32 +84,30 @@ router.post('/edit/:id', function(req, res){
   });
 });
 
-//Delete job_listing
-router.delete('/:id', function(req, res){
-  if(!req.user._id){
+//Delete Job Listing
+router.delete('/:id', function(req, res) {
+  if (!req.user._id)
     res.status(500).send();
-  }
 
   let query = {_id:req.params.id}
 
-  Job_listing.findById(req.params.id, function(err, job_listing){
-    if(job_listing.author != req.user._id){
+  Job_listing.findById(req.params.id, function(err, job_listing) {
+    if (job_listing.author != req.user._id)
       res.status(500).send();
-    } else {
-      job_listing.remove(query, function(err){
-        if(err){
+    else {
+      job_listing.remove(query, function(err) {
+        if (err)
           console.log(err);
-        }
         res.send('Success');
       });
     }
   });
 });
 
-//Get Single job_listing
-router.get('/:id', function(req, res){
-  Job_listing.findById(req.params.id, function(err, job_listing){
-    User.findById(job_listing.author, function(err, user){
+//Get Job Listing
+router.get('/:id', function(req, res) {
+  Job_listing.findById(req.params.id, function(err, job_listing) {
+    User.findById(job_listing.author, function(err, user) {
       res.render('job_listing', {
         job_listing:job_listing,
         author: user.name
@@ -119,10 +117,10 @@ router.get('/:id', function(req, res){
 });
 
 //Access Control
-function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated())
     return next();
-  } else {
+  else {
     req.flash('danger', 'Please Login');
     res.redirect('/users/login');
   }

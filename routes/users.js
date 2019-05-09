@@ -7,12 +7,12 @@ const passport = require('passport');
 let User = require('../models/user');
 
 //Register Form
-router.get('/register', function(req, res){
+router.get('/register', function(req, res) {
   res.render('register');
 });
 
 //Register Proccess
-router.post('/register', function(req, res){
+router.post('/register', function(req, res) {
   const name = req.body.name;
   const username = req.body.username;
   const password = req.body.password;
@@ -26,25 +26,24 @@ router.post('/register', function(req, res){
 
   let errors = req.validationErrors();
 
-  if(errors){
+  if (errors)
     res.render('register', {
       errors:errors
     });
-  } else {
+  else {
     let newUser = new User({
       name:name,
       username:username,
       password:password
     });
 
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err){
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(newUser.password, salt, function(err, hash) {
+        if (err)
           console.log(err);
-        }
         newUser.password = hash;
-        newUser.save(function(err){
-          if(err){
+        newUser.save(function(err) {
+          if (err) {
             console.log(err);
             return;
           } else {
@@ -58,12 +57,12 @@ router.post('/register', function(req, res){
 });
 
 //Login Form
-router.get('/login', function(req, res){
+router.get('/login', function(req, res) {
   res.render('login');
 });
 
 //Login Process
-router.post('/login', function(req, res, next){
+router.post('/login', function(req, res, next) {
   passport.authenticate('local', {
     successRedirect:'/',
     failureRedirect:'/users/login',
@@ -72,10 +71,63 @@ router.post('/login', function(req, res, next){
 });
 
 //Logout
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res) {
   req.logout();
   req.flash('success', 'You are logged out');
   res.redirect('/');
 });
+
+//Load Edit Form
+router.get('/edit/:id', ensureAuthenticated, function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (user.id != req.user._id) {
+      req.flash('danger', 'Not Authorized');
+      res.redirect('/');
+    }
+    res.render('edit_user', {
+      title:'Edit User',
+      user:user
+    });
+  });
+});
+
+//Edit User Bio
+router.post('/edit/:id', function(req, res) {
+  let user = {};
+  user.name = req.body.name;
+  user.username = req.body.username;
+  user.desc = req.body.desc;
+  User.updateOne({_id:req.params.id}, user, function(err) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      req.flash('success', 'User Information Updated');
+      res.redirect('/');
+    }
+  });
+});
+
+//Get Single User
+router.get('/:id', function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    res.render('user', {
+      email:user.username,
+      username:user.name,
+      description:user.desc,
+      id:user.id
+    });
+  });
+});
+
+//Access Control
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+  else {
+    req.flash('danger', 'Please Login');
+    res.redirect('/users/login');
+  }
+}
 
 module.exports = router;

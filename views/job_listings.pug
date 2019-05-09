@@ -13,6 +13,6 @@ block content
       li.list-group-item
         a(href="/listings/"+job_listing._id)= job_listing.title
         if (job_listing.pay != "")
-          p= job_listing.pay
+          p #{job_listing.pay}
     else
       p No Job Listings to Display

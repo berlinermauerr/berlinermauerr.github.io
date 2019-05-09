@@ -7,14 +7,14 @@ let Job_request = require('../models/job_request');
 let User = require('../models/user');
 
 //Add Route
-router.get('/add', ensureAuthenticated, function(req, res){
+router.get('/add', ensureAuthenticated, function(req, res) {
   res.render('add_job_request', {
     title:'Create Job Request'
   });
 });
 
 //Add Submit POST Route
-router.post('/add', function(req, res){
+router.post('/add', function(req, res) {
   req.checkBody('title','Title is required').notEmpty();
   //req.checkBody('author','Author is required').notEmpty();
   req.checkBody('desc','Description is required').notEmpty();
@@ -22,19 +22,19 @@ router.post('/add', function(req, res){
   //Get Errors
   let errors = req.validationErrors();
 
-  if(errors){
+  if (errors)
     res.render('add_job_request', {
       title:'Create Job Request',
       errors:errors
     });
-  } else {
+  else {
     let job_request = new Job_request();
     job_request.title = req.body.title;
     job_request.author = req.user._id;
     job_request.desc = req.body.desc;
 
-    job_request.save(function(err){
-      if(err){
+    job_request.save(function(err) {
+      if (err) {
         console.log(err);
         return;
       } else {
@@ -46,9 +46,9 @@ router.post('/add', function(req, res){
 });
 
 //Load Edit Form
-router.get('/edit/:id', ensureAuthenticated, function(req, res){
-  Job_request.findById(req.params.id, function(err, job_request){
-    if(job_request.author != req.user._id){
+router.get('/edit/:id', ensureAuthenticated, function(req, res) {
+  Job_request.findById(req.params.id, function(err, job_request) {
+    if (job_request.author != req.user._id) {
       req.flash('danger', 'Not Authorized');
       res.redirect('/requests/');
     }
@@ -59,16 +59,13 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res){
   });
 });
 
-//Update Submit POST Route
-router.post('/edit/:id', function(req, res){
+//Edit Job Request
+router.post('/edit/:id', function(req, res) {
   let job_request = {};
   job_request.title = req.body.title;
   job_request.desc = req.body.desc;
-
-  let query = {_id:req.params.id}
-
-  Job_request.updateOne(query, job_request, function(err){
-    if(err){
+  Job_request.updateOne({_id:req.params.id}, job_request, function(err) {
+    if (err) {
       console.log(err);
       return;
     } else {
@@ -78,45 +75,40 @@ router.post('/edit/:id', function(req, res){
   });
 });
 
-//Delete job_request
-router.delete('/:id', function(req, res){
-  if(!req.user._id){
+//Delete Job Request
+router.delete('/:id', function(req, res) {
+  if (!req.user._id)
     res.status(500).send();
-  }
-
-  let query = {_id:req.params.id}
-
-  Job_request.findById(req.params.id, function(err, job_request){
-    if(job_request.author != req.user._id){
+  Job_request.findById(req.params.id, function(err, job_request) {
+    if (job_request.author != req.user._id)
       res.status(500).send();
-    } else {
-      job_request.remove(query, function(err){
-        if(err){
+    else {
+      job_request.remove({_id:req.params.id}, function(err) {
+        if (err)
           console.log(err);
-        }
         res.send('Success');
       });
     }
   });
 });
 
-//Get Single job_request
-router.get('/:id', function(req, res){
-  Job_request.findById(req.params.id, function(err, job_request){
-    User.findById(job_request.author, function(err, user){
+//Get Job Request
+router.get('/:id', function(req, res) {
+  Job_request.findById(req.params.id, function(err, job_request) {
+    User.findById(job_request.author, function(err, user) {
       res.render('job_request', {
         job_request:job_request,
-        author: user.name
+        author:user.name
       });
     });
   });
 });
 
 //Access Control
-function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()){
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated())
     return next();
-  } else {
+  else {
     req.flash('danger', 'Please Login');
     res.redirect('/users/login');
   }

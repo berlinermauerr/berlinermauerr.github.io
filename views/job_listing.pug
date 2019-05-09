@@ -1,17 +1,18 @@
 extends layout
 
 block content
-  h1= "Job Offer: " + job_listing.title
-  h5 Posted By: #{author}
+  h1 Job Offer: #{job_listing.title}
+  h4 Posted By: 
+    a(href='/users/'+job_listing.author) #{author}
   hr
   h3 #{job_listing.desc}
   br
   h4
     p= job_listing.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_listing.pay
     if (job_listing.address == "")
-      p='Address: Not Disclosed'
+      p Address: Not Disclosed
     else
-      p= 'Address: ' + job_listing.address
+      p Address: #{job_listing.address}
       #map
         script.
           function initMap() { //Begins script for creating map element
@@ -114,6 +115,6 @@ block content
 
   a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
   if user
-    if user.id ==job_listing.author
-      a.btn.btn-outline-info(href='/listings/edit/'+job_listing._id, style='margin-right: 5px;') Edit 
+    if user.id == job_listing.author
+      a.btn.btn-outline-info(href='/listings/edit/'+job_listing._id, style='margin-right: 5px;') Edit
       a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id) Delete

@@ -2,10 +2,12 @@ extends layout
 
 block content
   h1 #{title}
+  h4 Posted By: You
+  hr
   form(method='POST', action='/requests/edit/'+job_request._id)
     #form-group
       label Title*
-      input.form-control(name='title', type='text', value=job_request.title)
+      input.form-control(name='title', type='text', value= job_request.title)
     br
     #form-group
       label Description*

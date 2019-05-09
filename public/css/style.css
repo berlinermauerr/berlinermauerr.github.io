@@ -32,11 +32,11 @@ h1{
 }
 
 h4{
-  color: #337ab7;
+  color: #007bff;
 }
 
 h5{
-  color: #337ab7;
+  color: #007bff;
 }
 
 hr
@@ -47,6 +47,7 @@ hr
 .list-group-item{
   background-color: #FFFFFF;
   border-color: #1b1f22;
+  border-top-width: thick;
   border-bottom-width: thick;
   border-block-end-color: #337ab7;
 }

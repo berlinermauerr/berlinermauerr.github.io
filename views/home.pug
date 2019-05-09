@@ -4,11 +4,11 @@ block content
   h1 #{title}
   h4
     if user
-        p Welcome, #{user.name}
+        p Welcome, 
+          a(href='/users/'+user._id) #{user.name}
     else
       a(href='/users/login') Login to Post
   hr
-
   #myCarousel.carousel.slide(data-ride='carousel')
     ol.carousel-indicators
       li.active(data-target='#myCarousel', data-slide-to='0')
