@@ -35,6 +35,7 @@ app.use(bodyParser.json());
 
 //Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
+
 //Express Session Middleware
 app.use(session({
   secret: 'Vita is awesome',
@@ -67,9 +68,8 @@ app.use(expressValidator({
   }
 }));
 
-//Passport Config
+//Passport Middleware & Config
 require('./public/js/passport')(passport);
-//Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.get('*', function(req, res, next) {
