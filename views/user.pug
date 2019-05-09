@@ -3,7 +3,7 @@ extends layout
 block content
   h1 User: #{username}
   h4 Email: 
-    a(href='mailto:'+email) #{email}
+    a(href='mailto:' + email) #{email}
   hr
   h3
     p= description == "" || description == null ? 'No User Bio Found' : description
@@ -11,4 +11,4 @@ block content
   a.btn.btn-outline-light(href='javascript:history.go(-1)', style='margin-right: 20px;') Back
   if user
     if user.id == id
-      a.btn.btn-outline-info(href='/users/edit/'+user._id, style='margin-right: 5px;') Edit
+      a.btn.btn-outline-info(href='/users/edit/' + user._id, style='margin-right: 5px;') Edit

@@ -7,25 +7,23 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
+//Connect to MongoDB/Mongoose
 mongoose.connect('mongodb://localhost:27017/jobfinder', { useNewUrlParser: true });
 let db = mongoose.connection;
 
-//Check connection
+//Check Connection
 db.once('open', function() {
   console.log('Connected to MongoDB');
 });
 
-//Check for DB errors
+//Check For Connection Errors
 db.on('error', function(err) {
   console.log(err);
 });
 
-//Init App
-const app = express();
-
-//Bring in Models
-let job_listing = require('./models/job_listing');
-let job_request = require('./models/job_request');
+const app = express(); //Initialize Express App
+let job_listing = require('./models/job_listing'); //Job Listing Model
+let job_request = require('./models/job_request'); //Job Request Model
 
 //Load View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +35,6 @@ app.use(bodyParser.json());
 
 //Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
-
 //Express Session Middleware
 app.use(session({
   secret: 'Vita is awesome',
@@ -75,7 +72,6 @@ require('./public/js/passport')(passport);
 //Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.get('*', function(req, res, next) {
   res.locals.user = req.user || null;
   next();
@@ -137,12 +133,9 @@ app.get('/about', function(req, res) {
 });
 
 //Route Files
-let job_listings = require('./routes/listings');
-let job_requests = require('./routes/requests');
-let users = require('./routes/users');
-app.use('/listings', job_listings);
-app.use('/requests', job_requests);
-app.use('/users', users);
+app.use('/listings', require('./routes/listings'));
+app.use('/requests', require('./routes/requests'));
+app.use('/users', require('./routes/users'));
 
 //Catch 404
 app.get('*', function(req, res) {

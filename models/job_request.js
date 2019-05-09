@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
-//Job Request Schema
-let job_request_schema = mongoose.Schema({
+//Job Request Mongoose Schema
+let job_request = module.exports = mongoose.model('job_request', mongoose.Schema({
   title:{
     type: String,
     required: true
@@ -14,6 +14,4 @@ let job_request_schema = mongoose.Schema({
     type: String,
     required: true
   }
-});
-
-let job_request = module.exports = mongoose.model('job_request', job_request_schema);
+}));

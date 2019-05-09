@@ -3,7 +3,7 @@ extends layout
 block content
   h1 Job Offer: #{job_listing.title}
   h4 Posted By: 
-    a(href='/users/'+job_listing.author) #{author}
+    a(href='/users/' + job_listing.author) #{author}
   hr
   h3 #{job_listing.desc}
   br
@@ -116,5 +116,5 @@ block content
   a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
   if user
     if user.id == job_listing.author
-      a.btn.btn-outline-info(href='/listings/edit/'+job_listing._id, style='margin-right: 5px;') Edit
+      a.btn.btn-outline-info(href='/listings/edit/' + job_listing._id, style='margin-right: 5px;') Edit
       a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id) Delete

@@ -11,7 +11,7 @@ block content
   ul.list-group
     each job_listing, i in job_listings
       li.list-group-item
-        a(href="/listings/"+job_listing._id)= job_listing.title
+        a(href="/listings/" + job_listing._id)= job_listing.title
         if (job_listing.pay != "")
           p #{job_listing.pay}
     else

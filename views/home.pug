@@ -5,7 +5,7 @@ block content
   h4
     if user
         p Welcome, 
-          a(href='/users/'+user._id) #{user.name}
+          a(href='/users/' + user._id) #{user.name}
     else
       a(href='/users/login') Login to Post
   hr

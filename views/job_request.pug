@@ -3,12 +3,12 @@ extends layout
 block content
   h1 Job Request: #{job_request.title}
   h4 Posted By: 
-    a(href='/users/'+job_request.author) #{author}
+    a(href='/users/' + job_request.author) #{author}
   hr
   h3 #{job_request.desc}
   p
   a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Back
   if user
     if user.id == job_request.author
-      a.btn.btn-outline-info(href='/requests/edit/'+job_request._id, style='margin-right: 5px;') Edit
+      a.btn.btn-outline-info(href='/requests/edit/' + job_request._id, style='margin-right: 5px;') Edit
       a.btn.btn-outline-danger.delete-job_request(href='#',data-id=job_request._id) Delete

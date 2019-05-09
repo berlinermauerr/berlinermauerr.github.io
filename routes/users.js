@@ -17,6 +17,7 @@ router.post('/register', function(req, res) {
   const password = req.body.password;
   const password2 = req.body.password2;
 
+  //Validate User Input
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('username', 'Email is required').notEmpty();
   req.checkBody('username', 'Email is not valid').isEmail();
@@ -24,7 +25,6 @@ router.post('/register', function(req, res) {
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
   let errors = req.validationErrors();
-
   if (errors)
     res.render('register', {
       errors:errors
@@ -76,7 +76,7 @@ router.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-//Load Edit Form
+//Edit User Info Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res) {
   User.findById(req.params.id, function(err, user) {
     if (user.id != req.user._id) {

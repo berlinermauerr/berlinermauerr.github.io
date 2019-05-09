@@ -4,22 +4,21 @@ const bcrypt = require('bcryptjs');
 
 module.exports = function(passport) {
   passport.use(new LocalStrategy(function(username, password, done) {
-    //Matches account email
-    let query = {username:username};
-    User.findOne(query, function(err, user) {
+    //Matches Account Email
+    User.findOne({username:username}, function(err, user) {
       if (err)
         throw err;
       if (!user)
-        return done(null, false, {message: 'No account exists with that email'});
+        return done(null, false, {message: 'No Account Exists With That Email'});
 
-      //Matches account password
+      //Matches Account Password
       bcrypt.compare(password, user.password, function(err, isMatch) {
         if (err)
           throw err;
         if (isMatch)
           return done(null, user);
         else
-          return done(null, false, {message: 'Password is incorrect'});
+          return done(null, false, {message: 'Password is Incorrect'});
       });
     });
   }));

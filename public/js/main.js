@@ -1,10 +1,9 @@
+//Delete Job Listing
 $(document).ready(function() {
   $('.delete-job_listing').on('click', function(e) {
-    $target = $(e.target);
-    const id = $target.attr('data-id');
     $.ajax({
       type:'DELETE',
-      url: '/listings/'+id,
+      url: '/listings/' + $(e.target).attr('data-id'),
       success: function(response) {
         window.location.href='/listings/';
       },
@@ -13,12 +12,12 @@ $(document).ready(function() {
       }
     });
   });
+
+  //Delete Job Request
   $('.delete-job_request').on('click', function(e) {
-    $target = $(e.target);
-    const id = $target.attr('data-id');
     $.ajax({
       type:'DELETE',
-      url: '/requests/'+id,
+      url: '/requests/' + $(e.target).attr('data-id'),
       success: function(response) {
         window.location.href='/requests/';
       },

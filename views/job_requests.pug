@@ -11,6 +11,6 @@ block content
   ul.list-group
     each job_request, i in job_requests
       li.list-group-item
-        a(href="/requests/"+job_request._id)= job_request.title
+        a(href="/requests/" + job_request._id)= job_request.title
     else
       p No Job Requests to Display

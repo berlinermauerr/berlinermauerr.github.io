@@ -4,7 +4,7 @@ block content
   h1 #{title}
   h4 Posted By: You
   hr
-  form(method='POST', action='/listings/edit/'+job_listing._id)
+  form(method='POST', action='/listings/edit/' + job_listing._id)
     #form-group
       label Title*
       input.form-control(name='title', type='text', value= job_listing.title)

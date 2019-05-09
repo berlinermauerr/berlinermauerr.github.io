@@ -18,7 +18,6 @@ router.post('/add', function(req, res) {
 
   //Get Errors
   let errors = req.validationErrors();
-
   if (errors)
     res.render('add_job_listing', {
       title:'Create Job Listing',
@@ -45,7 +44,7 @@ router.post('/add', function(req, res) {
   }
 });
 
-//Load Edit Form
+//Edit Job Listing Form
 router.get('/edit/:id', ensureAuthenticated, function(req, res) {
   Job_listing.findById(req.params.id, function(err, job_listing) {
     if (job_listing.author != req.user._id) {
