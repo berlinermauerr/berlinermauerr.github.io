@@ -1,5 +1,5 @@
-//Delete Job Listing
 $(document).ready(function() {
+  //Delete Job Listing
   $('.delete-job_listing').on('click', function(e) {
     $.ajax({
       type: 'DELETE',
