@@ -16,14 +16,17 @@ html
         span.navbar-toggler-icon
       #navbarCollapse.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
+          i.fas.fa-paper-plane
           a.nav-link(href='/listings/') Listings
+          i.fas.fa-bullhorn
           a.nav-link(href='/requests/') Requests
         ul.navbar-nav.ml-auto
           form.search_form.center-block(method='get', action="/search/")
             .input-group.search_option
               input#searchBox.search_field.form-control(type='text', name='q', placeholder='Search', style='margin-right: 3px;')
               span.input-group-btn
-                input#search.search_submit.btn.btn-outline-info(onclick='myFunction()', type='submit', value='Search')
+                button.btn.btn-outline-info(onclick='myFunction()', type='submit', style='margin-right: 3px;')
+                  i.fas.fa-search
           a.nav-link(href='/about') About
           if user
             a.nav-link(href='/users/logout') Logout

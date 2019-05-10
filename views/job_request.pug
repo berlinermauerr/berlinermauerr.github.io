@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  h1 Job Request: #{job_request.title}
-  h4 Posted By: 
+  h1
+    i.fas.fa-bullhorn &nbsp;
+    span #{job_request.title}
+  h4
+    i.fas.fa-user &nbsp;
     a(href='/users/' + job_request.author) #{author}
   hr
   h3 #{job_request.desc}

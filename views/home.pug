@@ -1,12 +1,15 @@
 extends layout
 
 block content
-  h1 #{title}
+  h1
+    i.fas.fa-home &nbsp;
+    span #{title}
   h4
     if user
-        p Welcome, 
-          a(href='/users/' + user._id) #{user.name}
+      i.fas.fa-user &nbsp;
+      a(href='/users/' + user._id) Welcome, #{user.name}
     else
+      i.far.fa-user &nbsp;
       a(href='/users/login') Login to Post
   hr
   #myCarousel.carousel.slide(data-ride='carousel')

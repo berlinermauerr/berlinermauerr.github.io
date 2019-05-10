@@ -1,7 +1,12 @@
 extends layout
 
 block content
-  h1 #{title}
+  h1 
+    i.fas.fa-plus-circle &nbsp;
+    span #{title}
+  h4
+    i.fas.fa-user &nbsp;
+    span #{user.name}
   hr
   form(method='POST', action='/listings/add')
     #form-group
@@ -29,4 +34,5 @@ block content
     br
     a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;')
       i.fas.fa-angle-double-left
-    input.btn.btn-outline-primary(type='submit', value='Submit')
+    button.btn.btn-outline-success(type='submit')
+      i.fas.fa-check

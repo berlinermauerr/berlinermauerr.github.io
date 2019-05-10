@@ -27,6 +27,7 @@ footer {
 }
 
 h1 {
+  font-weight: bold;
   color: #EEEEEE;
 }
 
@@ -41,6 +42,26 @@ h5 {
 h6 {
   color: #337ab7;
   font-weight: bold;
+  font-size: x-large;
+}
+
+input.btn.btn-outline-primary {
+  font-size: x-large;
+}
+
+a.btn.btn-outline-info {
+  font-size: x-large;
+}
+
+a.btn.btn-outline-light {
+  font-size: x-large;
+}
+
+a.btn.btn-outline-danger {
+  font-size: x-large;
+}
+
+button.btn.btn-outline-success {
   font-size: x-large;
 }
 

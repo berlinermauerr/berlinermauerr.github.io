@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1 #{title}
-  h4 Your User Information
+  h1
+    i.fas.fa-edit &nbsp;
+    span #{title}
+  h4
+    i.fas.fa-info-circle &nbsp;
+    span Your User Information
   hr
   form(method='POST', action='/users/edit/' + user._id)
     #form-group
@@ -26,4 +30,5 @@ block content
     br
     a.btn.btn-outline-light(href='/users/' + user._id, style='margin-right: 20px;')
       i.fas.fa-angle-double-left
-    input.btn.btn-outline-primary(type='submit', value='Submit')
+    button.btn.btn-outline-success(type='submit')
+      i.fas.fa-check

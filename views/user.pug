@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  h1 User: #{username}
-  h4 Email: 
+  h1
+    i.fas.fa-user &nbsp;
+    span #{username}
+  h4
+    i.fas.fa-envelope &nbsp;
     a(href='mailto:' + email) #{email}
   hr
   h3

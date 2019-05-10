@@ -1,19 +1,25 @@
 extends layout
 
 block content
-  h1 #{title}
+  h1
+    i.fas.fa-paper-plane &nbsp;
+    span #{title}
   h4
     if user
-        a(href='/listings/add') (+) Create Job Listing
+      i.fas.fa-plus-circle &nbsp;
+      a(href='/listings/add') Create Job Listing
     else
-      a(href='/users/login') (+) Login to Post Job Listings
+      i.far.fa-user &nbsp;
+      a(href='/users/login') Login to Post Job Listings
   hr
-  h6 Job Title
-    span(style='float: right;') Pay
+  h6
+    i.fas.fa-sort-amount-down &nbsp;
+    span Job Title
+    span(style='float: right;').fas.fa-dollar-sign &nbsp;
   ul.list-group
     each job_listing, i in job_listings.reverse()
       li.list-group-item
-        span.fas.fa-info-circle &nbsp;
+        i.fas.fa-paper-plane &nbsp;
         a(href="/listings/" + job_listing._id)= job_listing.title
         if (job_listing.pay != "")
           span(style='float: right;') #{job_listing.pay}

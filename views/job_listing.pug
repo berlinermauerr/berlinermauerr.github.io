@@ -1,8 +1,11 @@
 extends layout
 
 block content
-  h1 Job Offer: #{job_listing.title}
-  h4 Posted By: 
+  h1
+    i.fas.fa-paper-plane &nbsp;
+    span #{job_listing.title}
+  h4
+    i.fas.fa-user &nbsp;
     a(href='/users/' + job_listing.author) #{author}
   hr
   h3 #{job_listing.desc}

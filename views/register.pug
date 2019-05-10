@@ -1,7 +1,12 @@
 extends layout
 
 block content
-  h1 Create an account
+  h1
+    i.fas.fa-user-circle &nbsp;
+    span Create an Account
+  h4
+    i.far.fa-user &nbsp;
+    span Start Posting Today
   hr
   form(method='POST', action='/users/register')
     #form-group

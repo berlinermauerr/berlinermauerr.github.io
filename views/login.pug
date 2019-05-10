@@ -1,7 +1,16 @@
 extends layout
 
 block content
-  h1 Login
+  h1
+    i.fas.fa-user-circle &nbsp;
+    span Login
+  h4
+    if user
+      i.fas.fa-user &nbsp;
+      span Change Account
+    else
+      i.far.fa-user &nbsp;
+      span Login to Post
   hr
   form(method='POST', action='/users/login')
     #form-group
