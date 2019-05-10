@@ -27,13 +27,13 @@ router.post('/register', function(req, res) {
   let errors = req.validationErrors();
   if (errors)
     res.render('register', {
-      errors:errors
+      errors: errors
     });
   else {
     let newUser = new User({
-      name:name,
-      username:username,
-      password:password
+      name: name,
+      username: username,
+      password: password
     });
 
     bcrypt.genSalt(10, function(err, salt) {
@@ -63,8 +63,8 @@ router.get('/login', function(req, res) {
 //Login Process
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', {
-    successRedirect:'/',
-    failureRedirect:'/users/login',
+    successRedirect: '/',
+    failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);
 });
@@ -84,8 +84,8 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res) {
       res.redirect('/');
     }
     res.render('edit_user', {
-      title:'Edit User',
-      user:user
+      title: 'Edit User',
+      user: user
     });
   });
 });
@@ -96,7 +96,7 @@ router.post('/edit/:id', function(req, res) {
   user.name = req.body.name;
   user.username = req.body.username;
   user.desc = req.body.desc;
-  User.updateOne({_id:req.params.id}, user, function(err) {
+  User.updateOne({_id: req.params.id}, user, function(err) {
     if (err) {
       console.log(err);
       return;
@@ -111,10 +111,10 @@ router.post('/edit/:id', function(req, res) {
 router.get('/:id', function(req, res) {
   User.findById(req.params.id, function(err, user) {
     res.render('user', {
-      email:user.username,
-      username:user.name,
-      description:user.desc,
-      id:user.id
+      email: user.username,
+      username: user.name,
+      description: user.desc,
+      id: user.id
     });
   });
 });

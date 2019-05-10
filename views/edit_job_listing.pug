@@ -11,7 +11,7 @@ block content
     br
     #form-group
       label Description*
-      textarea.form-control(name='desc')= job_listing.desc
+      textarea.form-control(name='desc', type='text')= job_listing.desc
     br
     #form-group
       label Rate of Pay
@@ -28,5 +28,6 @@ block content
       br
       input#file(name='photo', type='file', accept='image/*')
     br
-    a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Cancel
+    a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;')
+      i.fas.fa-angle-double-left
     input.btn.btn-outline-primary(type='submit', value='Submit')

@@ -8,7 +8,7 @@ const session = require('express-session');
 const passport = require('passport');
 
 //Connect to MongoDB/Mongoose
-mongoose.connect('mongodb://localhost:27017/jobfinder', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/jobfinder', {useNewUrlParser: true});
 let db = mongoose.connection;
 
 //Check Connection
@@ -30,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 //Body Parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Set Public Folder
@@ -80,7 +80,7 @@ app.get('*', function(req, res, next) {
 //Home Route
 app.get('/', function(req, res) {
   res.render('home', {
-    title:'Home',
+    title: 'Home',
   });
 });
 
@@ -91,7 +91,7 @@ app.get('/listings', function(req, res) {
       console.log(err);
     else {
       res.render('job_listings', {
-        title:'Job Listings',
+        title: 'Job Listings',
         job_listings: job_listings
       });
     }
@@ -105,8 +105,8 @@ app.get('/requests', function(req, res) {
       console.log(err);
     else {
       res.render('job_requests', {
-        title:'Job Requests',
-        job_requests: job_requests
+        title: 'Job Requests',
+        job_requests: job_requests,
       });
     }
   });
@@ -119,7 +119,7 @@ app.get('/search', function(req, res) {
       console.log(err);
     else {
       res.render('search', {
-        title:'Search',
+        title: 'Search',
       });
     }
   });
@@ -128,7 +128,7 @@ app.get('/search', function(req, res) {
 //About Route
 app.get('/about', function(req, res) {
   res.render('about', {
-    title:'About',
+    title: 'About',
   });
 });
 
@@ -140,7 +140,7 @@ app.use('/users', require('./routes/users'));
 //Catch 404
 app.get('*', function(req, res) {
   res.render('home', {
-    title:'404 Page Not Found',
+    title: '404 Page Not Found',
   });
 });
 

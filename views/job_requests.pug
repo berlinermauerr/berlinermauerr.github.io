@@ -8,9 +8,14 @@ block content
     else
       a(href='/users/login') (+) Login to Post Job Requests
   hr
+  h6 Job Title
+    span(style='float: right;') Expected Pay
   ul.list-group
-    each job_request, i in job_requests
+    each job_request, i in job_requests.reverse()
       li.list-group-item
+        span.fas.fa-info-circle &nbsp;
         a(href="/requests/" + job_request._id)= job_request.title
+        if (job_request.pay != "")
+          span(style='float: right;') #{job_request.pay}
     else
       p No Job Requests to Display

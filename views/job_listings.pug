@@ -8,11 +8,14 @@ block content
     else
       a(href='/users/login') (+) Login to Post Job Listings
   hr
+  h6 Job Title
+    span(style='float: right;') Pay
   ul.list-group
-    each job_listing, i in job_listings
+    each job_listing, i in job_listings.reverse()
       li.list-group-item
+        span.fas.fa-info-circle &nbsp;
         a(href="/listings/" + job_listing._id)= job_listing.title
         if (job_listing.pay != "")
-          p #{job_listing.pay}
+          span(style='float: right;') #{job_listing.pay}
     else
       p No Job Listings to Display

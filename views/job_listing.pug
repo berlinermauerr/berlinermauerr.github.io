@@ -19,8 +19,8 @@ block content
             var geocoder = new google.maps.Geocoder(); //Used for converting user address to latitude/longitude
             geocoder.geocode({"address": '#{job_listing.address}'}, function(results) {
               var map = new google.maps.Map(document.getElementById('map'), { //Creates a new map
-                center:results[0].geometry.location, //Centers map on chosen address
-                zoom:12, //Zooms in on location
+                center: results[0].geometry.location, //Centers map on chosen address
+                zoom: 12, //Zooms in on location
                 styles: [ //Customizes map theme to match dark website
                   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                   {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
@@ -103,7 +103,7 @@ block content
                 ]
               });
               var marker = new google.maps.Marker({ //Makes a marker on the map
-                map:map,
+                map: map,
                 animation: google.maps.Animation.DROP, //Adds pin drop animation
                 position: results[0].geometry.location, //Sets marker position
                 title: '#{job_listing.address}', //Sets tooltip text for marker
@@ -112,9 +112,12 @@ block content
             });
           }
         script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
-
-  a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;') Back
+  br
+  a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;')
+    i.fas.fa-angle-double-left
   if user
     if user.id == job_listing.author
-      a.btn.btn-outline-info(href='/listings/edit/' + job_listing._id, style='margin-right: 5px;') Edit
-      a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id) Delete
+      a.btn.btn-outline-info(href='/listings/edit/' + job_listing._id, style='margin-right: 20px;')
+        i.fas.fa-pen
+      a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id)
+        i.fas.fa-trash-alt

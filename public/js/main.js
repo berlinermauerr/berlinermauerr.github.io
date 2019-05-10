@@ -2,7 +2,7 @@
 $(document).ready(function() {
   $('.delete-job_listing').on('click', function(e) {
     $.ajax({
-      type:'DELETE',
+      type: 'DELETE',
       url: '/listings/' + $(e.target).attr('data-id'),
       success: function(response) {
         window.location.href='/listings/';
@@ -16,7 +16,7 @@ $(document).ready(function() {
   //Delete Job Request
   $('.delete-job_request').on('click', function(e) {
     $.ajax({
-      type:'DELETE',
+      type: 'DELETE',
       url: '/requests/' + $(e.target).attr('data-id'),
       success: function(response) {
         window.location.href='/requests/';

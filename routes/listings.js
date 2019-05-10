@@ -7,7 +7,7 @@ let User = require('../models/user'); //User Model
 //Add Route
 router.get('/add', ensureAuthenticated, function(req, res) {
   res.render('add_job_listing', {
-    title:'Create Job Listing'
+    title: 'Create Job Listing'
   });
 });
 
@@ -20,8 +20,8 @@ router.post('/add', function(req, res) {
   let errors = req.validationErrors();
   if (errors)
     res.render('add_job_listing', {
-      title:'Create Job Listing',
-      errors:errors
+      title: 'Create Job Listing',
+      errors: errors
     });
   else {
     let job_listing = new Job_listing();
@@ -52,8 +52,8 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res) {
       res.redirect('/listings/');
     }
     res.render('edit_job_listing', {
-      title:'Edit Job Listing',
-      job_listing:job_listing
+      title: 'Edit Job Listing',
+      job_listing: job_listing
     });
   });
 });
@@ -67,7 +67,7 @@ router.post('/edit/:id', function(req, res) {
   job_listing.address = req.body.address;
   //Images will probably have to be updated here
 
-  Job_listing.updateOne({_id:req.params.id}, job_listing, function(err) {
+  Job_listing.updateOne({_id: req.params.id}, job_listing, function(err) {
     if (err) {
       console.log(err);
       return;
@@ -87,7 +87,7 @@ router.delete('/:id', function(req, res) {
     if (job_listing.author != req.user._id)
       res.status(500).send();
     else {
-      job_listing.remove({_id:req.params.id}, function(err) {
+      job_listing.remove({_id: req.params.id}, function(err) {
         if (err)
           console.log(err);
         res.send('Success');
@@ -101,7 +101,7 @@ router.get('/:id', function(req, res) {
   Job_listing.findById(req.params.id, function(err, job_listing) {
     User.findById(job_listing.author, function(err, user) {
       res.render('job_listing', {
-        job_listing:job_listing,
+        job_listing: job_listing,
         author: user.name
       });
     });

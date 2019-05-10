@@ -7,7 +7,7 @@ let User = require('../models/user'); //User Model
 //Add Route
 router.get('/add', ensureAuthenticated, function(req, res) {
   res.render('add_job_request', {
-    title:'Create Job Request'
+    title: 'Create Job Request'
   });
 });
 
@@ -20,14 +20,15 @@ router.post('/add', function(req, res) {
   let errors = req.validationErrors();
   if (errors)
     res.render('add_job_request', {
-      title:'Create Job Request',
-      errors:errors
+      title: 'Create Job Request',
+      errors: errors
     });
   else {
     let job_request = new Job_request();
     job_request.title = req.body.title;
     job_request.author = req.user._id;
     job_request.desc = req.body.desc;
+    job_request.pay = req.body.pay;
 
     job_request.save(function(err) {
       if (err) {
@@ -49,8 +50,8 @@ router.get('/edit/:id', ensureAuthenticated, function(req, res) {
       res.redirect('/requests/');
     }
     res.render('edit_job_request', {
-      title:'Edit Job Request',
-      job_request:job_request
+      title: 'Edit Job Request',
+      job_request: job_request
     });
   });
 });
@@ -60,7 +61,8 @@ router.post('/edit/:id', function(req, res) {
   let job_request = {};
   job_request.title = req.body.title;
   job_request.desc = req.body.desc;
-  Job_request.updateOne({_id:req.params.id}, job_request, function(err) {
+  job_request.pay = req.body.pay;
+  Job_request.updateOne({_id: req.params.id}, job_request, function(err) {
     if (err) {
       console.log(err);
       return;
@@ -79,7 +81,7 @@ router.delete('/:id', function(req, res) {
     if (job_request.author != req.user._id)
       res.status(500).send();
     else {
-      job_request.remove({_id:req.params.id}, function(err) {
+      job_request.remove({_id: req.params.id}, function(err) {
         if (err)
           console.log(err);
         res.send('Success');
@@ -93,8 +95,8 @@ router.get('/:id', function(req, res) {
   Job_request.findById(req.params.id, function(err, job_request) {
     User.findById(job_request.author, function(err, user) {
       res.render('job_request', {
-        job_request:job_request,
-        author:user.name
+        job_request: job_request,
+        author: user.name
       });
     });
   });

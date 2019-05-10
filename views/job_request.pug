@@ -6,9 +6,14 @@ block content
     a(href='/users/' + job_request.author) #{author}
   hr
   h3 #{job_request.desc}
-  p
-  a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Back
+  br
+  h4= job_request.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_request.pay
+  br
+  a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;')
+    i.fas.fa-angle-double-left
   if user
     if user.id == job_request.author
-      a.btn.btn-outline-info(href='/requests/edit/' + job_request._id, style='margin-right: 5px;') Edit
-      a.btn.btn-outline-danger.delete-job_request(href='#',data-id=job_request._id) Delete
+      a.btn.btn-outline-info(href='/requests/edit/' + job_request._id, style='margin-right: 20px;')
+        i.fas.fa-pen
+      a.btn.btn-outline-danger.delete-job_request(href='#',data-id=job_request._id)
+        i.fas.fa-trash-alt

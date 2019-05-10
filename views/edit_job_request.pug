@@ -11,7 +11,12 @@ block content
     br
     #form-group
       label Description*
-      textarea.form-control(name='desc')= job_request.desc
+      textarea.form-control(name='desc', type='text')= job_request.desc
     br
-    a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;') Cancel
+    #form-group
+      label Expected Pay
+      input.form-control(name='pay', type='text', value= job_request.pay)
+    br
+    a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;')
+      i.fas.fa-angle-double-left
     input.btn.btn-outline-primary(type='submit', value='Submit')

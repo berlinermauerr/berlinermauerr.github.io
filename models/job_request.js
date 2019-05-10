@@ -13,5 +13,9 @@ let job_request = module.exports = mongoose.model('job_request', mongoose.Schema
   desc:{
     type: String,
     required: true
+  },
+  pay:{
+    type: String,
+    required: false
   }
 }));
