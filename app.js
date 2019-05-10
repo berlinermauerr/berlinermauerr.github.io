@@ -80,7 +80,7 @@ app.get('*', function(req, res, next) {
 //Home Route
 app.get('/', function(req, res) {
   res.render('home', {
-    title: 'Home',
+    title: 'Home'
   });
 });
 
@@ -106,7 +106,7 @@ app.get('/requests', function(req, res) {
     else {
       res.render('job_requests', {
         title: 'Job Requests',
-        job_requests: job_requests,
+        job_requests: job_requests
       });
     }
   });
@@ -119,7 +119,7 @@ app.get('/search', function(req, res) {
       console.log(err);
     else {
       res.render('search', {
-        title: 'Search',
+        title: 'Search'
       });
     }
   });
@@ -128,7 +128,7 @@ app.get('/search', function(req, res) {
 //About Route
 app.get('/about', function(req, res) {
   res.render('about', {
-    title: 'About',
+    title: 'About'
   });
 });
 
@@ -140,7 +140,7 @@ app.use('/users', require('./routes/users'));
 //Catch 404
 app.get('*', function(req, res) {
   res.render('home', {
-    title: '404 Page Not Found',
+    title: '404 Page Not Found'
   });
 });
 
