@@ -11,7 +11,7 @@ block content
   h3
     p= description == "" || description == null ? 'No User Bio Found' : description
   br
-  a.btn.btn-outline-light(href='javascript:history.go(-1)', style='margin-right: 20px;')
+  a.btn.btn-outline-light(href='javascript:history.go(-1)', style='margin-right: 20px')
     i.fas.fa-angle-double-left
   if user
     if user.id == id

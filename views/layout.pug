@@ -23,9 +23,9 @@ html
         ul.navbar-nav.ml-auto
           form.search_form.center-block(method='get', action="/search/")
             .input-group.search_option
-              input#searchBox.search_field.form-control(type='text', name='q', placeholder='Search', style='margin-right: 3px;')
+              input#searchBox.search_field.form-control(type='text', name='q', placeholder='Search', style='margin-right: 3px')
               span.input-group-btn
-                button.btn.btn-outline-info(onclick='myFunction()', type='submit', style='margin-right: 3px;')
+                button.btn.btn-outline-info(onclick='myFunction()', type='submit', style='margin-right: 3px')
                   i.fas.fa-search
           a.nav-link(href='/about') About
           if user

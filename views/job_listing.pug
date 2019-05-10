@@ -11,11 +11,14 @@ block content
   h3 #{job_listing.desc}
   br
   h4
-    p= job_listing.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_listing.pay
+    p= job_listing.pay == "" ? 'Not Disclosed' : job_listing.pay
+      i(style='float: left').fas.fa-dollar-sign &nbsp; &nbsp;
     if (job_listing.address == "")
-      p Address: Not Disclosed
+      p Not Disclosed
+        i(style='float: left').fas.fa-map &nbsp;
     else
-      p Address: #{job_listing.address}
+      p #{job_listing.address}
+        i(style='float: left').fas.fa-map &nbsp;
       #map
         script.
           function initMap() { //Begins script for creating map element
@@ -116,11 +119,11 @@ block content
           }
         script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAfVz0NDFENqAEJ4pZ68I10fKfeMNCWYZ0&callback=initMap')
   br
-  a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px;')
+  a.btn.btn-outline-light(href='/listings/', style='margin-right: 20px')
     i.fas.fa-angle-double-left
   if user
     if user.id == job_listing.author
-      a.btn.btn-outline-info(href='/listings/edit/' + job_listing._id, style='margin-right: 20px;')
+      a.btn.btn-outline-info(href='/listings/edit/' + job_listing._id, style='margin-right: 20px')
         i.fas.fa-pen
       a.btn.btn-outline-danger.delete-job_listing(href='#',data-id=job_listing._id)
         i.fas.fa-trash-alt

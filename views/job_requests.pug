@@ -15,13 +15,13 @@ block content
   h6
     i.fas.fa-sort-amount-down &nbsp;
     span Job Title
-    span(style='float: right;').fas.fa-dollar-sign &nbsp;
+    span(style='float: right').fas.fa-dollar-sign &nbsp;
   ul.list-group
     each job_request, i in job_requests.reverse()
       li.list-group-item
         i.fas.fa-bullhorn &nbsp;
         a(href="/requests/" + job_request._id)= job_request.title
         if (job_request.pay != "")
-          span(style='float: right;') #{job_request.pay}
+          span(style='float: right') #{job_request.pay}
     else
       p No Job Requests to Display

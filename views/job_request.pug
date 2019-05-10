@@ -10,13 +10,14 @@ block content
   hr
   h3 #{job_request.desc}
   br
-  h4= job_request.pay == "" ? 'Pay: Not Disclosed' : 'Pay: ' + job_request.pay
+  h4= job_request.pay == "" ? 'Not Disclosed' : job_request.pay
+    i(style='float: left').fas.fa-dollar-sign &nbsp; &nbsp;
   br
-  a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px;')
+  a.btn.btn-outline-light(href='/requests/', style='margin-right: 20px')
     i.fas.fa-angle-double-left
   if user
     if user.id == job_request.author
-      a.btn.btn-outline-info(href='/requests/edit/' + job_request._id, style='margin-right: 20px;')
+      a.btn.btn-outline-info(href='/requests/edit/' + job_request._id, style='margin-right: 20px')
         i.fas.fa-pen
       a.btn.btn-outline-danger.delete-job_request(href='#',data-id=job_request._id)
         i.fas.fa-trash-alt
